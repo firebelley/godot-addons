@@ -8,7 +8,7 @@ const SHAKY_CAMERA_2D = "ShakyCamera2D"
 
 const AUTOLOAD_SCREEN_TRANSITION = "ScreenTransition"
 
-const SETTING_ENABLE_SCREEN_TRANSITION = "addons/godot_node_library/enable_screen_transition"
+const SETTING_ENABLE_SCREEN_TRANSITION = "addons/node_library/enable_screen_transition"
 
 var screen_transition_scene = preload("scenes/ScreenTransition.tscn")
 

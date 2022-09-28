@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://addons/node-library/scenes/screen_transition.gd" type="Script" id=1]
-[ext_resource path="res://addons/node-library/assets/transition-texture.png" type="Texture" id=2]
+[ext_resource path="res://addons/node_library/scenes/screen_transition.gd" type="Script" id=1]
+[ext_resource path="res://addons/node_library/assets/transition-texture.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
