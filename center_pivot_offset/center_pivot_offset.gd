@@ -9,7 +9,7 @@ func _enter_tree():
 	button = ToolButton.new()
 	button.text = "Center Pivot Offset"
 
-	var iconTexture = preload("icon/hammer.svg") as Texture
+	var iconTexture = preload("icon/align_center.svg") as Texture
 	button.icon = iconTexture
 	button.expand_icon = false
 	add_control_to_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, button)
