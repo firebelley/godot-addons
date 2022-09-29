@@ -19,8 +19,7 @@ func transition_to_scene(scene_path: String):
 
 func transition():
 	if animation_player.is_playing():
-		animation_player.stop()
-		animation_player.seek(0, true)
+		animation_player.stop(true)
 	animation_player.play("transition")
 
 func set_transition_texture(texture: Texture):

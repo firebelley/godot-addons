@@ -130,6 +130,7 @@ shader_param/invert = false
 shader_param/transition_texture = ExtResource( 2 )
 
 [node name="ScreenTransition" type="CanvasLayer"]
+pause_mode = 2
 layer = 100
 script = ExtResource( 1 )
 
