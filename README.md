@@ -1,3 +1,7 @@
+## How to Use
+
+I created an overview video which you can watch here: https://youtu.be/wc9WUgSkIaA
+
 ### Center Pivot Offset
 
 When a `Control` node is selected, a button will appear in the toolbar that will center the `rect_pivot_offset` of the `Control` node.
