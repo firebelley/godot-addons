@@ -8,7 +8,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
-	if (autostart):
+	if (autostart && !Engine.editor_hint):
 		start()
 
 
