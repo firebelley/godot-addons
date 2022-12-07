@@ -1,13 +1,13 @@
-tool
+@tool
 extends Camera2D
 
 const VISUALIZER_NAME = "ShakyCamera2DNoiseVisualizer"
 
-export(OpenSimplexNoise) var shake_noise
-export(float) var max_shake_offset = 20
-export(float) var shake_decay = 5
-export(float) var shake_frequency = 50;
-export(bool) var visualize setget set_visualize, get_visualize;
+@export var shake_noise: OpenSimplexNoise
+@export var max_shake_offset: float = 20
+@export var shake_decay: float = 5
+@export var shake_frequency: float = 50;
+@export var visualize: bool : get = get_visualize, set = set_visualize;
 
 var current_noise_value: float = 0
 var current_shake_percentage = 0;
@@ -50,7 +50,7 @@ func update_visualizer():
 		existing.queue_free()
 	
 	if visualize && Engine.editor_hint:
-		var sprite = Sprite.new()
+		var sprite = Sprite2D.new()
 		var noise_texture = NoiseTexture.new()
 		noise_texture.noise = shake_noise
 		

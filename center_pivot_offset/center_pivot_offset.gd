@@ -1,19 +1,19 @@
-tool
+@tool
 extends EditorPlugin
 
-var button: ToolButton
+var button: Button
 var selectedControl: Control
 
 func _enter_tree():
-	get_editor_interface().get_selection().connect("selection_changed", self, "on_editor_selection_changed")
-	button = ToolButton.new()
+	get_editor_interface().get_selection().connect("selection_changed",Callable(self,"on_editor_selection_changed"))
+	button = Button.new()
 	button.text = "Center Pivot Offset"
 
-	var iconTexture = preload("icon/align_center.svg") as Texture
+	var iconTexture = preload("icon/align_center.svg") as Texture2D
 	button.icon = iconTexture
 	button.expand_icon = false
 	add_control_to_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, button)
-	button.connect("pressed", self, "on_button_pressed")
+	button.connect("pressed",Callable(self,"on_button_pressed"))
 	button.visible = false
 
 	update_node_selection()
@@ -38,5 +38,5 @@ func on_button_pressed():
 	if (selectedControl == null):
 		push_warning("No control currently selected for centering pivot offset!")
 		return
-	selectedControl.rect_pivot_offset = selectedControl.rect_size / 2
+	selectedControl.pivot_offset = selectedControl.size / 2
 	print('Updated pivot_offset for control %s' % selectedControl.name)
