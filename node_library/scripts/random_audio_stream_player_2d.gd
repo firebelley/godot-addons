@@ -1,10 +1,10 @@
-tool
+@tool
 extends Node2D
 
-export(Array, AudioStream) var streams = [] setget set_streams, get_streams
-export(bool) var randomize_pitch = false
-export(float, 0, 10, .05) var pitch_minimum = .9
-export(float, 0, 10, .05) var pitch_maximum = 1.1
+@export var streams = [] : get = get_streams, set = set_streams # (Array, AudioStream)
+@export var randomize_pitch: bool = false
+@export var pitch_minimum = .9 # (float, 0, 10, .05)
+@export var pitch_maximum = 1.1 # (float, 0, 10, .05)
 
 var rng = RandomNumberGenerator.new()
 
@@ -12,7 +12,7 @@ func _ready():
 	rng.randomize()
 
 
-func _get_configuration_warning():
+func _get_configuration_warnings():
 	if streams == null && get_child_count() > 0:
 		return "Stream array is out of sync with children. Children should be configured only through the streams property of %s." % name
 	if get_child_count() != streams.size():
@@ -93,7 +93,7 @@ func extract_first_node_with_stream(existing_nodes: Array, resource_path: String
 		var node = existing_nodes[i]
 		if (node.stream != null && node.stream.resource_path == resource_path):
 			found_node = node
-			existing_nodes.remove(i)
+			existing_nodes.remove_at(i)
 			break
 	return found_node
 

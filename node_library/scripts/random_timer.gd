@@ -1,8 +1,8 @@
-tool
+@tool
 extends Timer
 
-export(float) var min_wait_time = 1 setget set_min_wait_time, get_min_wait_time
-export(float) var max_wait_time = 1.5 setget set_max_wait_time, get_max_wait_time
+@export var min_wait_time: float = 1 : get = get_min_wait_time, set = set_min_wait_time
+@export var max_wait_time: float = 1.5 : get = get_max_wait_time, set = set_max_wait_time
 
 var rng = RandomNumberGenerator.new()
 
@@ -14,10 +14,10 @@ func _ready():
 
 func start(time_sec: float = -1):
 	if (time_sec > 0):
-		.start(time_sec)
+		super.start(time_sec)
 	else:
 		var wait_time = rng.randf_range(min_wait_time, max_wait_time)
-		.start(wait_time)
+		super.start(wait_time)
 
 
 func set_min_wait_time(val: float):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/node_library/scenes/screen_transition.gd" type="Script" id=1]
-[ext_resource path="res://addons/node_library/assets/transition-texture.png" type="Texture" id=2]
+[ext_resource path="res://addons/node_library/assets/transition-texture.png" type="Texture2D" id=2]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -12,8 +12,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -24,20 +24,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:material:shader_param/invert")
+tracks/2/path = NodePath("TransitionRect:material:shader_param/reverse")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ false ]
 }
@@ -51,8 +51,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -63,20 +63,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5, 1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:material:shader_param/invert")
+tracks/2/path = NodePath("TransitionRect:material:shader_param/reverse")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
@@ -87,8 +87,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0.5, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "emit_transitioned_halfway"
@@ -103,18 +103,18 @@ code = "shader_type canvas_item;
 
 uniform sampler2D transition_texture;
 uniform float dissolve_value : hint_range(0.0, 1.0, 0.05);
-uniform vec4 transition_color : hint_color;
-uniform bool invert;
+uniform vec4 transition_color : source_color;
+uniform bool reverse;
 
 void fragment() {
 	vec4 texColor = texture(TEXTURE, UV);
 	vec4 dissolve_color = texture(transition_texture, UV);
 	float mask = (dissolve_color.r + dissolve_color.g + dissolve_color.b + dissolve_color.a) / 4.0;
-	if (invert) {
+	if (reverse) {
 		mask = 1.0 - mask;
 	}
 	
-	if (mask > dissolve_value || (invert && mask >= dissolve_value)) {
+	if (mask > dissolve_value || (reverse && mask >= dissolve_value)) {
 		COLOR.rgba = vec4(texColor.rgb, 0.0);
 	}
 	else {
@@ -126,11 +126,11 @@ void fragment() {
 shader = SubResource( 3 )
 shader_param/dissolve_value = 0.0
 shader_param/transition_color = null
-shader_param/invert = false
+shader_param/reverse = false
 shader_param/transition_texture = ExtResource( 2 )
 
 [node name="ScreenTransition" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 layer = 100
 script = ExtResource( 1 )
 
