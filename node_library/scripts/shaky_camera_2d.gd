@@ -3,7 +3,7 @@ extends Camera2D
 
 const VISUALIZER_NAME = "ShakyCamera2DNoiseVisualizer"
 
-@export var shake_noise: OpenSimplexNoise
+@export var shake_noise: FastNoiseLite
 @export var max_shake_offset: float = 20
 @export var shake_decay: float = 5
 @export var shake_frequency: float = 50;
@@ -16,12 +16,11 @@ var current_direction_rotation = 0
 
 func _ready():
 	if shake_noise == null:
-		shake_noise = OpenSimplexNoise.new()
+		shake_noise = FastNoiseLite.new()
+		shake_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 		shake_noise.seed = randi()
-		shake_noise.octaves = 3
-		shake_noise.period = 2
-		shake_noise.persistence = .414
-		shake_noise.lacunarity = 2
+		shake_noise.fractal_octaves = 3
+		shake_noise.frequency = 2
 	
 	update_visualizer()
 
@@ -49,9 +48,9 @@ func update_visualizer():
 	if is_instance_valid(existing):
 		existing.queue_free()
 	
-	if visualize && Engine.editor_hint:
+	if visualize && Engine.is_editor_hint():
 		var sprite = Sprite2D.new()
-		var noise_texture = NoiseTexture.new()
+		var noise_texture = NoiseTexture2D.new()
 		noise_texture.noise = shake_noise
 		
 		self.add_child(sprite)
