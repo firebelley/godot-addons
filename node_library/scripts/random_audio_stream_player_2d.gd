@@ -60,7 +60,7 @@ func add_new_node(stream: AudioStream):
 
 
 func update_stream_player_nodes():
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint():
 		return
 
 	var existing_nodes = []

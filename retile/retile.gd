@@ -5,7 +5,7 @@ var button: Button
 var selectedTileMap: TileMap
 
 func _enter_tree():
-	get_editor_interface().get_selection().connect("selection_changed",Callable(self,"on_editor_selection_changed"))
+	get_editor_interface().get_selection().connect("selection_changed", on_editor_selection_changed)
 	button = Button.new()
 	button.text = "Re-tile"
 
@@ -13,7 +13,7 @@ func _enter_tree():
 	button.icon = iconTexture
 	button.expand_icon = false
 	add_control_to_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, button)
-	button.connect("pressed",Callable(self,"on_button_pressed"))
+	button.connect("pressed", on_button_pressed)
 	button.visible = false
 
 	update_node_selection()

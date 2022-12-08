@@ -1,10 +1,9 @@
-@tool
 extends CanvasLayer
 
 signal transitioned_halfway
 signal transitioned_fully
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _enter_tree():
@@ -20,14 +19,15 @@ func transition_to_scene(scene_path: String):
 func transition():
 	if animation_player.is_playing():
 		animation_player.stop(true)
-	animation_player.play("transition")
+	animation_player.play("wipe")
+
 
 func set_transition_texture(texture: Texture2D):
-	get_node("TransitionRect").material.set_shader_parameter("transition_texture", texture)
+	$TransitionRect.material.set_shader_parameter("transition_texture", texture)
 
 
 func set_transition_color(color: Color):
-	get_node("TransitionRect").material.set_shader_parameter("transition_color", color)
+	$TransitionRect.material.set_shader_parameter("transition_color", color)
 
 
 func set_speed_scale(scale: float):
@@ -35,8 +35,8 @@ func set_speed_scale(scale: float):
 
 
 func emit_transitioned_halfway():
-	emit_signal("transitioned_halfway")
+	transitioned_halfway.emit()
 
 
 func emit_transitioned_fully():
-	emit_signal("transitioned_fully")
+	transitioned_fully.emit()

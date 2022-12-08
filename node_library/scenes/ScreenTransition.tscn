@@ -1,104 +1,111 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bf7n4xs85e6sl"]
 
-[ext_resource path="res://addons/node_library/scenes/screen_transition.gd" type="Script" id=1]
-[ext_resource path="res://addons/node_library/assets/transition-texture.png" type="Texture2D" id=2]
+[ext_resource type="Script" path="res://addons/node_library/scenes/screen_transition.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cyg4r5ijphcv8" path="res://addons/node_library/assets/transition-texture.png" id="2"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="Animation_0353n"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("TransitionRect:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:material:shader_param/dissolveValue")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionRect:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:material:shader_param/reverse")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("TransitionRect:material:shader_parameter/reverse")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "transition"
+[sub_resource type="Animation" id="Animation_y7gu0"]
+resource_name = "wipe"
+step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("TransitionRect:visible")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 1 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:material:shader_param/dissolve_value")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionRect:material:shader_parameter/dissolve_value")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0, 0.5, 1 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ 0.0, 1.0, 0.0 ]
+"values": [0.0, 1.0, 0.0]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:material:shader_param/reverse")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("TransitionRect:material:shader_parameter/reverse")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.5 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0.5, 1 ),
-"transitions": PackedFloat32Array( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "emit_transitioned_halfway"
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"emit_transitioned_halfway"
 }, {
-"args": [  ],
-"method": "emit_transitioned_fully"
-} ]
+"args": [],
+"method": &"emit_transitioned_fully"
+}]
 }
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3e6g"]
+_data = {
+"RESET": SubResource("Animation_0353n"),
+"wipe": SubResource("Animation_y7gu0")
+}
+
+[sub_resource type="Shader" id="Shader_l04er"]
 code = "shader_type canvas_item;
 
 uniform sampler2D transition_texture;
@@ -122,24 +129,28 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
-shader_param/dissolve_value = 0.0
-shader_param/transition_color = null
-shader_param/reverse = false
-shader_param/transition_texture = ExtResource( 2 )
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ot5kr"]
+shader = SubResource("Shader_l04er")
+shader_parameter/dissolve_value = 0.0
+shader_parameter/reverse = false
+shader_parameter/transition_color = null
+shader_parameter/transition_texture = ExtResource("2")
 
 [node name="ScreenTransition" type="CanvasLayer"]
 process_mode = 2
 layer = 100
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/transition = SubResource( 1 )
+libraries = {
+"": SubResource("AnimationLibrary_q3e6g")
+}
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 visible = false
-material = SubResource( 4 )
+material = SubResource("ShaderMaterial_ot5kr")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
