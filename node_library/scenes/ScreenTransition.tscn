@@ -137,7 +137,7 @@ shader_parameter/transition_color = null
 shader_parameter/transition_texture = ExtResource("2")
 
 [node name="ScreenTransition" type="CanvasLayer"]
-process_mode = 2
+process_mode = 3
 layer = 100
 script = ExtResource("1")
 
