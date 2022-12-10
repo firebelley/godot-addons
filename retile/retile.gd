@@ -4,6 +4,7 @@ extends EditorPlugin
 var button: Button
 var selectedTileMap: TileMap
 
+
 func _enter_tree():
 	get_editor_interface().get_selection().connect("selection_changed", on_editor_selection_changed)
 	button = Button.new()
@@ -18,8 +19,10 @@ func _enter_tree():
 
 	update_node_selection()
 
+
 func _exit_tree():
 	button.queue_free()
+
 
 func update_node_selection():
 	var selectedNodes = get_editor_interface().get_selection().get_selected_nodes()
@@ -30,8 +33,10 @@ func update_node_selection():
 		selectedTileMap = null
 	button.visible = selectedTileMap != null
 
+
 func on_editor_selection_changed():
 	update_node_selection()
+
 
 func on_button_pressed():
 	if (selectedTileMap == null):

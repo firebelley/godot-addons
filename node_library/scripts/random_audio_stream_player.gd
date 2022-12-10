@@ -1,10 +1,10 @@
 @tool
 extends Node
 
-@export var streams = [] : get = get_streams, set = set_streams # (Array, AudioStream)
+@export var streams: Array[AudioStream] = [] : get = get_streams, set = set_streams
 @export var randomize_pitch: bool = false
-@export var pitch_minimum = .9 # (float, 0, 10, .05)
-@export var pitch_maximum = 1.1 # (float, 0, 10, .05)
+@export var pitch_minimum: float = .9
+@export var pitch_maximum: float = 1.1
 
 var rng = RandomNumberGenerator.new()
 
@@ -98,8 +98,8 @@ func extract_first_node_with_stream(existing_nodes: Array, resource_path: String
 	return found_node
 
 
-func set_streams(num):
-	streams = num
+func set_streams(new_streams):
+	streams = new_streams
 	update_stream_player_nodes()
 
 
