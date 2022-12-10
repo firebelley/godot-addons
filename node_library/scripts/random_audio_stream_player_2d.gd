@@ -1,10 +1,10 @@
 @tool
 extends Node2D
 
-@export var streams = [] : get = get_streams, set = set_streams # (Array, AudioStream)
+@export var streams : Array[AudioStream] = [] : get = get_streams, set = set_streams # (Array, AudioStream)
 @export var randomize_pitch: bool = false
-@export var pitch_minimum = .9 # (float, 0, 10, .05)
-@export var pitch_maximum = 1.1 # (float, 0, 10, .05)
+@export var pitch_minimum: float = .9
+@export var pitch_maximum: float = 1.1
 
 var rng = RandomNumberGenerator.new()
 
