@@ -10,7 +10,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 	if (autostart && !Engine.is_editor_hint()):
-		start()
+		start_random()
 
 
 func start_random(time_sec: float = -1.0):
