@@ -22,12 +22,16 @@ func _get_configuration_warnings():
 	return warnings
 
 
-func play_random(): 
-	if streams.size() == 0:
-		return
+func play_random(exclude_streams: Array[AudioStream] = []) -> RandomAudioStreamPlayerNew:
+	var adjusted_streams = streams
+	if exclude_streams.size() > 0:
+		adjusted_streams = adjusted_streams.filter(func(audio_stream: AudioStream): return !exclude_streams.has(audio_stream))
+
+	if adjusted_streams.size() == 0:
+		return null
 	
-	var random_index = rng.randi_range(0, streams.size() - 1)
-	var stream = streams[random_index]
+	var random_index = rng.randi_range(0, adjusted_streams.size() - 1)
+	var stream = adjusted_streams[random_index]
 
 	var instance = duplicate() as RandomAudioStreamPlayerNew
 	instance.stream = stream
@@ -37,11 +41,15 @@ func play_random():
 	add_child(instance)
 	instance.finished.connect(on_audio_finished.bind(instance))
 	instance.play()
+	return instance
 
 
 func play_times(times: int):
+	var played_streams: Array[AudioStream] = []
 	for i in range(times):
-		play_random()
+		var audio_instance = play_random(played_streams)
+		if audio_instance != null:
+			played_streams.append(audio_instance.stream)
 
 
 func on_audio_finished(stream_player: RandomAudioStreamPlayerNew):
