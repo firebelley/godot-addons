@@ -26,7 +26,7 @@ func play_random():
 	play_random_exclude_streams()
 
 
-func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> RandomAudioStreamPlayer:
+func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> AudioStreamPlayer:
 	var adjusted_streams = streams
 	if exclude_streams.size() > 0:
 		adjusted_streams = adjusted_streams.filter(func(audio_stream: AudioStream): return !exclude_streams.has(audio_stream))
@@ -37,8 +37,14 @@ func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> Ra
 	var random_index = rng.randi_range(0, adjusted_streams.size() - 1)
 	var stream = adjusted_streams[random_index]
 
-	var instance = duplicate() as RandomAudioStreamPlayer
+	var instance = AudioStreamPlayer.new()
 	instance.stream = stream
+	instance.volume_db = volume_db
+	instance.pitch_scale = pitch_scale
+	instance.mix_target = mix_target
+	instance.max_polyphony = max_polyphony
+	instance.bus = bus
+
 	if randomize_pitch:
 		instance.pitch_scale = rng.randf_range(pitch_minimum, pitch_maximum)
 	
@@ -56,5 +62,5 @@ func play_times(times: int):
 			played_streams.append(audio_instance.stream)
 
 
-func on_audio_finished(stream_player: RandomAudioStreamPlayer):
+func on_audio_finished(stream_player: AudioStreamPlayer):
 	stream_player.queue_free()
