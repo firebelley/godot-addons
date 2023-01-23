@@ -10,8 +10,6 @@ const AUTOLOAD_SCREEN_TRANSITION = "ScreenTransition"
 
 const SETTING_ENABLE_SCREEN_TRANSITION = "addons/node_library/enable_screen_transition"
 
-#var screen_transition_scene = preload("scenes/ScreenTransition.tscn")
-
 
 func _enter_tree():
 	add_custom_type(RANDOM_AUDIO_STREAM_PLAYER, "AudioStreamPlayer", preload("scripts/random_audio_stream_player.gd"), preload("assets/icons/random_audio_stream_player_16x16.png"))
