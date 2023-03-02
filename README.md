@@ -13,3 +13,7 @@ A collection of useful nodes. See the [example project here](https://github.com/
 ### Retile
 
 When a `TileMap` node is selected, a "ReTile" button will appear in the toolbar which will automatically re-apply autotiling to the selected `TileMap`.
+
+### ScreenTransition
+
+Add `addons\node_library\scenes\ScreenTransition.tscn` as an Autoload to your project. Then you can call the methods in `ScreenTransition`.

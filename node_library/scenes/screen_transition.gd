@@ -4,6 +4,7 @@ signal transitioned_halfway
 signal transitioned_fully
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var transition_rect: ColorRect = $TransitionRect
 
 
 func _enter_tree():
@@ -23,11 +24,11 @@ func transition():
 
 
 func set_transition_texture(texture: Texture2D):
-	$TransitionRect.material.set_shader_parameter("transition_texture", texture)
+	transition_rect.material.set_shader_parameter("transition_texture", texture)
 
 
 func set_transition_color(color: Color):
-	$TransitionRect.material.set_shader_parameter("transition_color", color)
+	transition_rect.material.set_shader_parameter("transition_color", color)
 
 
 func set_speed_scale(scale: float):

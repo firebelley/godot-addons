@@ -1,6 +1,5 @@
 @tool
 extends AudioStreamPlayer
-class_name RandomAudioStreamPlayer
 
 @export var streams: Array[AudioStream] = []
 @export var randomize_pitch: bool = false
@@ -8,6 +7,7 @@ class_name RandomAudioStreamPlayer
 @export var pitch_maximum: float = 1.1
 
 var rng = RandomNumberGenerator.new()
+
 
 func _ready():
 	rng.randomize()

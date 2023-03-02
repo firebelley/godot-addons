@@ -132,8 +132,8 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ot5kr"]
 shader = SubResource("Shader_l04er")
 shader_parameter/dissolve_value = 0.0
-shader_parameter/reverse = false
 shader_parameter/transition_color = null
+shader_parameter/reverse = false
 shader_parameter/transition_texture = ExtResource("2")
 
 [node name="ScreenTransition" type="CanvasLayer"]
