@@ -9,7 +9,7 @@ extends AudioStreamPlayer2D
 ## If greater than 0, limits the number of playing sounds to this number.
 @export var max_playing: int = 0
 ## Every RandomAudioStreamPlayer2D with the same ID will count toward the max_playing count.
-@export var max_playing_id: String = null
+@export var max_playing_id: String = ""
 
 var rng = RandomNumberGenerator.new()
 
