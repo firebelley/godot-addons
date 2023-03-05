@@ -59,6 +59,7 @@ func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> Au
 	instance.bus = bus
 	instance.attenuation = attenuation
 	instance.area_mask = area_mask
+	instance.max_distance = max_distance
 
 	if max_playing > 0:
 		instance.add_to_group(get_max_playing_id())
