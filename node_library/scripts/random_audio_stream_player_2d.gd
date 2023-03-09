@@ -48,11 +48,8 @@ func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> Au
 	if max_playing > 0 && get_tree().get_nodes_in_group(get_max_playing_id()).size() >= max_playing:
 		return null
 	
-	var random_index = rng.randi_range(0, adjusted_streams.size() - 1)
-	var stream = adjusted_streams[random_index]
-
 	var instance = AudioStreamPlayer2D.new()
-	instance.stream = stream
+	instance.stream = adjusted_streams.pick_random()
 	instance.volume_db = volume_db
 	instance.pitch_scale = pitch_scale
 	instance.max_polyphony = max_polyphony
