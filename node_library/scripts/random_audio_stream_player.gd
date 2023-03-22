@@ -5,7 +5,7 @@ extends AudioStreamPlayer
 @export var randomize_pitch: bool = false
 @export var pitch_minimum: float = .9
 @export var pitch_maximum: float = 1.1
-@export_category("Limit Simultaneous Plays")
+@export_group("Limit Simultaneous Plays")
 ## If greater than 0, limits the number of playing sounds to this number.
 @export var max_playing: int = 0
 ## Every RandomAudioStreamPlayer with the same ID will count toward the max_playing count.
