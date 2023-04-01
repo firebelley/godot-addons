@@ -5,6 +5,8 @@ extends AudioStreamPlayer
 @export var randomize_pitch: bool = false
 @export var pitch_minimum: float = .9
 @export var pitch_maximum: float = 1.1
+## How many sounds to play by default when play_random is called
+@export var default_play_times: int = 1
 @export_group("Limit Simultaneous Plays")
 ## If greater than 0, limits the number of playing sounds to this number.
 @export var max_playing: int = 0
@@ -26,6 +28,8 @@ func _get_configuration_warnings():
 		warnings.append("Randomized pitch scale will override the manually configured pitch scale.")
 	if max_playing > 0 && (max_playing_id == "" || max_playing_id == null):
 		warnings.append("max_playing is configured but no ID has been supplied. This may produce undesirable results.")
+	if get_child_count() > 0:
+		warnings.append("This node will not work properly if it has children.")
 	return warnings
 
 
@@ -34,7 +38,10 @@ func get_max_playing_id():
 
 
 func play_random():
-	play_random_exclude_streams()
+	if default_play_times > 1:
+		play_times(default_play_times)
+	else:
+		play_random_exclude_streams()
 
 
 func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> AudioStreamPlayer:
@@ -74,6 +81,13 @@ func play_times(times: int):
 		var audio_instance = play_random_exclude_streams(played_streams)
 		if audio_instance != null:
 			played_streams.append(audio_instance.stream)
+
+
+func set_volume(new_volume_db: float):
+	volume_db = new_volume_db
+	for child in get_children():
+		if child is AudioStreamPlayer:
+			child.volume_db = new_volume_db
 
 
 func on_audio_finished(stream_player: AudioStreamPlayer):
