@@ -3,8 +3,6 @@ extends Control
 
 
 func _ready():
-	if !Engine.is_editor_hint():
-		return
 	child_entered_tree.connect(on_child_entered_tree)
 	child_exiting_tree.connect(on_child_exiting_tree)
 	update_deferred()
@@ -27,7 +25,7 @@ func update_deferred():
 
 func on_child_entered_tree(node: Node):
 	if node is Control:
-		if !node.is_connected("item_rect_changed", update_deferred):
+		if Engine.is_editor_hint() && !node.is_connected("item_rect_changed", update_deferred):
 			node.item_rect_changed.connect(update_deferred)
 	
 
