@@ -3,6 +3,8 @@ extends Control
 
 
 func _ready():
+	if !Engine.is_editor_hint():
+		return
 	child_entered_tree.connect(on_child_entered_tree)
 	child_exiting_tree.connect(on_child_exiting_tree)
 	update_deferred()
