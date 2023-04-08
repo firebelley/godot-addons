@@ -5,7 +5,7 @@ extends Control
 func _ready():
 	child_entered_tree.connect(on_child_entered_tree)
 	child_exiting_tree.connect(on_child_exiting_tree)
-	Callable(update).call_deferred()
+	update_deferred()
 
 
 func update():
@@ -19,9 +19,15 @@ func update():
 	size = Vector2.ZERO
 
 
-func on_child_entered_tree(node: Node):
-	Callable(update).call_deferred()
+func update_deferred():
+	update.call_deferred()
 
+
+func on_child_entered_tree(node: Node):
+	if node is Control:
+		if !node.is_connected("item_rect_changed", update_deferred):
+			node.item_rect_changed.connect(update_deferred)
+	
 
 func on_child_exiting_tree(node: Node):
-	Callable(update).call_deferred()
+	update_deferred()
