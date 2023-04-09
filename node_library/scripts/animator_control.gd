@@ -1,7 +1,6 @@
 @tool
 extends Control
 
-
 func _ready():
 	child_entered_tree.connect(on_child_entered_tree)
 	child_exiting_tree.connect(on_child_exiting_tree)
