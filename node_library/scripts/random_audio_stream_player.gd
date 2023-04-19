@@ -5,6 +5,8 @@ extends AudioStreamPlayer
 @export var randomize_pitch: bool = false
 @export var pitch_minimum: float = .9
 @export var pitch_maximum: float = 1.1
+@export var db_variation_minimum: float = -2.0
+@export var db_variation_maximum: float = 2.0
 ## How many sounds to play by default when play_random is called
 @export var default_play_times: int = 1
 @export_group("Limit Simultaneous Plays")
@@ -62,6 +64,7 @@ func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> Au
 	instance.max_polyphony = max_polyphony
 	instance.mix_target = mix_target
 	instance.bus = bus
+	instance.volume_db += rng.randf_range(db_variation_minimum, db_variation_maximum)
 
 	if max_playing > 0:
 		instance.add_to_group(get_max_playing_id())
