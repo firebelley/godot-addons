@@ -9,6 +9,8 @@ extends AudioStreamPlayer2D
 @export var db_variation_maximum: float = 2.0
 ## How many sounds to play by default when play_random is called
 @export var default_play_times: int = 1
+## Value passed into each AudioStreamPlayer2D play() call
+@export var play_from_seconds: float = 0.0
 @export_group("Limit Simultaneous Plays")
 ## If greater than 0, limits the number of playing sounds to this number.
 @export var max_playing: int = 0
@@ -76,7 +78,7 @@ func play_random_exclude_streams(exclude_streams: Array[AudioStream] = []) -> Au
 	
 	add_child(instance)
 	instance.finished.connect(on_audio_finished.bind(instance))
-	instance.play()
+	instance.play(play_from_seconds)
 	return instance
 
 
