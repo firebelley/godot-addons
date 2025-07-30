@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bf7n4xs85e6sl"]
 
-[ext_resource type="Script" path="res://addons/node_library/scenes/screen_transition.gd" id="1"]
+[ext_resource type="Script" uid="uid://k7dy6qa6j2je" path="res://addons/node_library/scenes/screen_transition.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cyg4r5ijphcv8" path="res://addons/node_library/assets/transition-texture.png" id="2"]
 
 [sub_resource type="Animation" id="Animation_0353n"]
@@ -101,8 +101,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q3e6g"]
 _data = {
-"RESET": SubResource("Animation_0353n"),
-"wipe": SubResource("Animation_y7gu0")
+&"RESET": SubResource("Animation_0353n"),
+&"wipe": SubResource("Animation_y7gu0")
 }
 
 [sub_resource type="Shader" id="Shader_l04er"]
@@ -131,10 +131,10 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ot5kr"]
 shader = SubResource("Shader_l04er")
-shader_parameter/dissolve_value = 0.0
-shader_parameter/transition_color = null
-shader_parameter/reverse = false
 shader_parameter/transition_texture = ExtResource("2")
+shader_parameter/dissolve_value = 0.0
+shader_parameter/transition_color = Color(0, 0, 0, 1)
+shader_parameter/reverse = false
 
 [node name="ScreenTransition" type="CanvasLayer"]
 process_mode = 3
